@@ -9,3 +9,8 @@
 
 ○ Compiling / ...
  GET / 200 in 6.9s (next.js: 6.5s, application-code: 418ms)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 651ms
