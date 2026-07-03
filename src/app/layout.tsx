@@ -27,6 +27,18 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/*
+          Security Enhancement: Content Security Policy (CSP)
+          Since we use Next.js static export ('output: export'), we cannot use headers in next.config.ts.
+          We define CSP using a meta tag.
+          'unsafe-inline' is required for Next.js inline scripts during hydration in static exports.
+        */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self';"
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
