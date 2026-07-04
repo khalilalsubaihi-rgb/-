@@ -1,0 +1,4 @@
+## 2025-02-20 - Add Content Security Policy Meta Tag
+**Vulnerability:** Missing Content Security Policy (CSP) leaving the application vulnerable to XSS and injection attacks. Next.js static exports (used by this Capacitor Android project) do not support CSP HTTP headers configured via `next.config.ts`.
+**Learning:** For Next.js projects configured for static exports (e.g. for Capacitor Android deployments), CSP headers cannot be set via `next.config.ts`. The CSP must be enforced using a `<meta>` tag in `src/app/layout.tsx`. Furthermore, Next.js static exports require `'unsafe-inline'` in `script-src` for React hydration.
+**Prevention:** Ensure static export Next.js projects include CSP meta tags in their root layout. Always check if a project relies on `output: 'export'` before attempting to use header-based security configurations.
