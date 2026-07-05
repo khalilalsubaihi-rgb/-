@@ -27,6 +27,15 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Security enhancement: Baseline CSP to mitigate XSS risks.
+            'unsafe-inline' and 'unsafe-eval' are required for Next.js hydration and Konva in static export.
+            'data:' and 'blob:' are often required for canvas image operations. */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'"
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

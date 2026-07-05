@@ -1,0 +1,4 @@
+## 2024-07-05 - Enforcing CSP in Next.js Static Exports
+**Vulnerability:** Missing Content Security Policy (CSP), increasing the risk of Cross-Site Scripting (XSS) attacks.
+**Learning:** For Next.js static exports (`output: 'export'`), CSP headers configured in `next.config.ts` are not supported. CSP must be enforced using a `<meta>` tag in `src/app/layout.tsx`. Additionally, static exports require `'unsafe-inline'` and often `'unsafe-eval'` for `script-src` because the framework relies on inline scripts for React hydration, routing, and certain libraries (like Konva), and static exports do not support dynamic nonces.
+**Prevention:** When setting up a Next.js project with static exports (e.g., for Capacitor apps), implement CSP via the `<meta>` tag in the root layout and accept the necessity of `'unsafe-inline'`/`'unsafe-eval'`, mitigating risks by strictly controlling other directives like `default-src` and `connect-src`.
