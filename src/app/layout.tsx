@@ -27,6 +27,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* 🛡️ Sentinel: Enforcing Content Security Policy for static export build to mitigate XSS attacks.
+            Note: 'unsafe-inline' and 'unsafe-eval' are required for Next.js static exports and Konva.js. */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self';"
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
