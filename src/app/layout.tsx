@@ -27,6 +27,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Next.js static exports don't support CSP headers via next.config.ts. */}
+        {/* 'unsafe-inline' and 'unsafe-eval' are needed for React hydration and Konva.js. */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self';"
+        />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
