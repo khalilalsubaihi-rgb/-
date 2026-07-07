@@ -1,0 +1,4 @@
+## 2024-05-15 - [Added Content Security Policy]
+**Vulnerability:** Missing Content Security Policy (CSP) allowed potential Cross-Site Scripting (XSS) and data injection vulnerabilities.
+**Learning:** For Next.js projects configured for static exports (`output: 'export'`), CSP cannot be enforced via `next.config.ts` headers. Instead, a `<meta httpEquiv="Content-Security-Policy">` tag must be included in `src/app/layout.tsx`. Furthermore, the framework's reliance on inline scripts for React hydration and Konva.js requires `'unsafe-inline'` and `'unsafe-eval'` in the `script-src` directive since static exports don't support dynamic nonces.
+**Prevention:** Always verify if a Next.js application uses static exports when implementing CSP, and use the `<meta>` tag approach in the root layout with the appropriate baseline policies.
